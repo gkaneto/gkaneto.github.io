@@ -1,38 +1,66 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset=utf-8>
-		<title>My first three.js app</title>
-		<style>
-			body { margin: 0; }
-			canvas { width: 100%; height: 100% }
-		</style>
-	</head>
-	<body>
-    <h1>Hello World</h1>
-    <p>Testing Three.js.</p>
-		<script src="three.js"></script>
-		<script>
-      function animate() {
-        requestAnimationFrame( animate );
-        cube.rotation.x += 0.01;
-        cube.rotation.y += 0.01;
-        renderer.render( scene, camera );
-      }
+<head>
+  <meta charset=utf-8>
+  <title>My first three.js app</title>
+  <style>
+  body { margin: 0; }
+  canvas { width: 100%; height: 100% }
+  #info {
+    position: absolute;
+    top: 10px;
+    width: 100%;
+    text-align: center;
+    z-index: 100;
+    display:block;
+  }
+  #info a, .button { color: #f00; font-weight: bold; text-decoration: underline; cursor: pointer }
+  </style>
+</head>
+<body>
+  <h1>Hello World</h1>
+  <p>Testing Three.js.</p>
+  <div id="info">
+    <a href="http://threejs.org" target="_blank" rel="noopener">three.js</a> - procedural 3D text by <a href="http://www.lab4games.net/zz85/blog" target="_blank" rel="noopener">zz85</a> &amp; alteredq
+    <br/>type to enter new text, drag to spin the text
+    <br/><span class="button" id="color">change color</span>,
+    <span class="button" id="font">change font</span>,
+    <span class="button" id="weight">change weight</span>,
+    <span class="button" id="bevel">change bevel</span>
+    <a id="permalink" href="#">permalink</a>
+  </div>
+  <script src="js/three.js"></script>
+  <script>
+  function animate() {
+    requestAnimationFrame( animate );
+    cube.rotation.x += 0.01;
+    cube.rotation.y += 0.01;
+    renderer.render( scene, camera );
+  }
 
-      var scene = new THREE.Scene();
-      var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
-      var renderer = new THREE.WebGLRenderer();
-      renderer.setSize( window.innerWidth/2, window.innerHeight/2 );
-      document.body.appendChild( renderer.domElement );
+  var scene = new THREE.Scene();
+  var camera = new THREE.PerspectiveCamera( 45, window.innerWidth / (window.innerHeight/2), 1, 500 );
+  var renderer = new THREE.WebGLRenderer();
+  renderer.setSize( window.innerWidth, window.innerHeight/2 );
+  document.body.appendChild( renderer.domElement );
 
-      var geometry = new THREE.BoxGeometry( 1, 1, 1 );
-      var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-      var cube = new THREE.Mesh( geometry, material );
-      scene.add( cube );
+  var geometry = new THREE.BoxGeometry( 1, 1, 1 );
+  var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+  var cube = new THREE.Mesh( geometry, material );
+  scene.add( cube );
 
-      camera.position.z = 5;
-      animate();
-		</script>
-	</body>
+  var material2 = new THREE.LineBasicMaterial( { color: 0x0000ff } );
+  var geometry2 = new THREE.Geometry();
+  geometry2.vertices.push(new THREE.Vector3( -2, 0, 0) );
+  geometry2.vertices.push(new THREE.Vector3( 0, 2, 0) );
+  geometry2.vertices.push(new THREE.Vector3( 2, 0, 0) );
+  var line = new THREE.Line( geometry2, material2 );
+  scene.add(line);
+
+  camera.position.set( 0, 0, 5 );
+  camera.lookAt( 0, 0, 0 );
+
+  animate();
+  </script>
+</body>
 </html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset=utf-8>
+  <title>My first three.js app</title>
+
+</head>
+
+<body>
+  <h1>Hello World</h1>
+  <p>Testing Three.js.</p>
+  <p id="demo"></p>
+  <script src="conf__2.js"></script>
+
+// TODO <form>
+  <input type="text" id="txt_id"></input>
+  <input type="text" id="txt_level"></input>
+  <input type="text" id="txt_stars"></input>
+  <button type="button" id="btnAddCol">Add new column</button>
+
+</br>
+  <table id="mytable">
+    <tr> <td align="right">My cards</td><td colspan="3" align="right">cardId</td> </tr>
+    <tr> <td align="right"></td><td colspan="3" align="right">Name</td> </tr>
+    <tr> <td align="right"></td><td colspan="3" align="right">Attack</td> </tr>
+    <tr> <td align="right"></td><td colspan="3" align="right">Color</td> </tr>
+    <tr> <td align="right"></td><td colspan="3" align="right">Buffer</td> </tr>
+
+    <script>
+
+  document.getElementById('btnAddCol').click(appendColumn(txt_id,txt_level,txt_stars));
+
+    function appendColumn(cardId,level,stars) {
+        var tbl = document.getElementById('mytable'), // table reference
+            i;
+        // open loop for each row and append cell
+        for (i = 0; i < tbl.rows.length; i++) {
+            createCell(tbl.rows[i].insertCell(tbl.rows[i].cells.length), i, 'col');
+        }
+    }
+
+
+    var sands = map.locations[2];
+    for (var m = 0; m < sands.missions.length; m++) {
+      document.write("<tr><td>");
+      document.write(sands.missions[m].name+ " ["+sands.missions[m].enemy.cardGame.decks[0].cardIds.toString() + "]");
+      document.write("</td>");
+      for (i = 0; i<3; i++) {
+
+        c_id = sands.missions[m].enemy.cardGame.cards[i].cardId;
+        c_level = sands.missions[m].enemy.cardGame.cards[i].level;
+        c_stars = sands.missions[m].enemy.cardGame.cards[i].evolution.currentStage;
+        var card = cards.filter(x => x.cardId == c_id);
+        document.write("<td>"+ getAttack(card[0].baseAttack, card[0].rarity, c_level, c_stars) + "</td>");
+        if (i == 2) {
+          document.write("</tr>");
+        }
+      }
+
+      for (i = 0; i<3; i++) {
+        if (i == 0) {
+          document.write("<tr><td></td>");
+        }
+        c_id = sands.missions[m].enemy.cardGame.cards[i].cardId;
+        c_level = sands.missions[m].enemy.cardGame.cards[i].level;
+        c_stars = sands.missions[m].enemy.cardGame.cards[i].evolution.currentStage;
+        var card = cards.filter(x => x.cardId == c_id);
+        document.write("<td>"+ getHP(card[0].baseHp, card[0].rarity, c_level, c_stars) + "</td>");
+        if (i == 2) {
+          document.write("</tr>");
+        }
+      }
+
+      for (i = 0; i<3; i++) {
+        if (i == 0) {
+          document.write("<tr><td></td>");
+        }
+        c_id = sands.missions[m].enemy.cardGame.cards[i].cardId;
+        c_level = sands.missions[m].enemy.cardGame.cards[i].level;
+        c_stars = sands.missions[m].enemy.cardGame.cards[i].evolution.currentStage;
+        var card = cards.filter(x => x.cardId == c_id);
+        document.write("<td>"+ col[card[0].color] + "</td>");
+        if (i == 2) {
+          document.write("</tr>");
+        }
+      }
+    }
+
+
+
+    //  console.log(card[0]);
+
+    </script>
+  </table>
+
+
+
+<script>
+var sands = map.locations[2];
+for (var m = 0; m < sands.missions.length; m++) {
+  document.write("mission name: " + sands.missions[m].name + " [");
+  document.write(sands.missions[m].enemy.cardGame.decks[0].cardIds.toString() + "]<br>");
+  for (i = 0; i<3; i++) {
+    c_id = sands.missions[m].enemy.cardGame.cards[i].cardId;
+    c_level = sands.missions[m].enemy.cardGame.cards[i].level;
+    c_stars = sands.missions[m].enemy.cardGame.cards[i].evolution.currentStage;
+    document.write("__enemy " + (i+1) + ": " + c_id + "[" + c_level + "][" + c_stars + "]<br>");
+    var card = cards.filter(x => x.cardId == c_id);
+    var color = Object.keys(colors).find(key => colors[key] === card[0].color);
+    var rarity = Object.keys(rar).find(key => rar[key] === card[0].color);
+    document.write("____name: " + card[0].name + "<br>");
+    document.write("____color: " + color + "<br>");
+    document.write("____rarity: " + rarity + "<br>");
+    document.write("____baseattack: " + card[0].baseAttack + "<br>");
+    document.write("____basehp: " + card[0].baseHp + "<br>");
+    document.write("____level: " + c_level + "<br>");
+    document.write("____stars: " + c_stars + "<br>");
+    document.write("____attack: " + getAttack(card[0].baseAttack, card[0].rarity, c_level, c_stars) + "<br>");
+    document.write("____hp: " + getHP(card[0].baseHp, card[0].rarity, c_level, c_stars) + "<br>");
+
+  }
+  document.write("<br>");
+}
+
+</script>
+
+</body>
+</html>
