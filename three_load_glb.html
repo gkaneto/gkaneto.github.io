@@ -72,10 +72,11 @@
       // called when the resource is loaded
       function ( gltf ) {
         model =  gltf.scene;
-        scene.add( model );        
+        scene.add( model );
         mixer = new THREE.AnimationMixer(model);
         anim = gltf.animations;
-        mixer.clipAction(anim[0]).play();
+        mixer.clipAction(anim[0]).setLoop(THREE.LoopOnce);
+        // mixer.clipAction(anim[0]).play();
 
       },
       // called while loading is progressing
@@ -96,6 +97,14 @@
     renderer.gammaOutput = true;
     container.appendChild( renderer.domElement );
     window.addEventListener( 'resize', onWindowResize, false );
+
+    renderer.domElement.addEventListener('click', function(ev) {
+      // if (findObjectUnderEvent(ev, arScene.camera, [model])) {
+      console.log("click");
+      mixer.clipAction(anim[0]).stop();
+      mixer.clipAction(anim[0]).play();
+      // }
+    }, false);
     // stats
     stats = new Stats();
     container.appendChild( stats.dom );

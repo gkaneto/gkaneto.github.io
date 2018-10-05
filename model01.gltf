@@ -135,7 +135,7 @@
         {
             "bufferView" : 9, 
             "componentType" : 5126, 
-            "count" : 2, 
+            "count" : 60, 
             "max" : [
                 1.0
             ], 
@@ -147,10 +147,10 @@
         {
             "bufferView" : 10, 
             "componentType" : 5126, 
-            "count" : 2, 
+            "count" : 60, 
             "max" : [
                 0.0, 
-                0.0, 
+                0.9990466833114624, 
                 -0.0, 
                 1.0
             ], 
@@ -244,18 +244,18 @@
         }, 
         {
             "buffer" : 0, 
-            "byteLength" : 8, 
+            "byteLength" : 240, 
             "byteOffset" : 58584
         }, 
         {
             "buffer" : 0, 
-            "byteLength" : 32, 
-            "byteOffset" : 58592
+            "byteLength" : 960, 
+            "byteOffset" : 58824
         }
     ], 
     "buffers" : [
         {
-            "byteLength" : 58624, 
+            "byteLength" : 59784, 
             "uri" : "model01.bin"
         }
     ], 
