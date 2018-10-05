@@ -44,6 +44,7 @@
 
 <script>
 var scene, model, mixer, anim, action;
+  var clock = new THREE.Clock();
 
 var findObjectUnderEvent = function(ev, camera, objects) {
 
@@ -109,8 +110,8 @@ loader.load(
     model.rotation.x = Math.PI/2;
     mixer = new THREE.AnimationMixer(model);
     anim = gltf.animations;
-    // mixer.clipAction(anim[0]).setLoop(THREE.LoopOnce);
-    mixer.clipAction(anim[0]).play();
+    mixer.clipAction(anim[0]).setLoop(THREE.LoopOnce);
+    // mixer.clipAction(anim[0]).play();
 
 
   },
@@ -163,13 +164,13 @@ window.ARThreeOnLoad = function() {
 
     // var box = createBox();
 
-    // renderer.domElement.addEventListener('click', function(ev) {
-    //   // if (findObjectUnderEvent(ev, arScene.camera, [model])) {
-    //   console.log("click");
-    //   mixer.clipAction(anim[0]).stop();
-    //   mixer.clipAction(anim[0]).play();
-    // // }
-    // }, false);
+    renderer.domElement.addEventListener('click', function(ev) {
+      // if (findObjectUnderEvent(ev, arScene.camera, [model])) {
+      console.log("click");
+      mixer.clipAction(anim[0]).stop();
+      mixer.clipAction(anim[0]).play();
+    // }
+    }, false);
 
     var markerRoot = arController.createThreeBarcodeMarker(20);
     // markerRoot.add(box.box);
@@ -178,7 +179,10 @@ window.ARThreeOnLoad = function() {
 
     var tick = function() {
       arScene.process();
-
+      var delta = clock.getDelta();
+      if (mixer != null) {
+        mixer.update(delta);
+      };
       // box.box.tick();
 
       arScene.renderOn(renderer);
