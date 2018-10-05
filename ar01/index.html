@@ -29,12 +29,20 @@
     <span class="button" id="test">Test</span>
   </div>
 
-  <script async src="js/artoolkit.min.js"></script>
+  <!-- <script async src="js/artoolkit.min.js"></script> -->
+
+<script src="js/artoolkit.debug.js">
+// - include debug build
+</script>
+<script src="js/artoolkit.api.js">
+// - include JS API
+</script>
+
   <script async src="js/three.js"></script>
   <script async src="js/artoolkit.three.js"></script>
 
   <script>
-// 
+//
 //   navigator.mediaDevices.enumerateDevices()
 //   .then(devices => {
 //     var videoDevices = [0,0];
@@ -195,7 +203,7 @@
 
   window.ARThreeOnLoad = function() {
 
-  	ARController.getUserMediaThreeScene({maxARVideoSize: 320, facing: 'environment', cameraParam: 'js/camera_para-iPhone 5 rear 640x480 1.0m.dat',
+  	ARController.getUserMediaThreeScene({maxARVideoSize: 320, facingMode: 'environment', cameraParam: 'js/camera_para-iPhone 5 rear 640x480 1.0m.dat',
   	onSuccess: function(arScene, arController, arCamera) {
 
   		arController.setPatternDetectionMode(artoolkit.AR_MATRIX_CODE_DETECTION);
